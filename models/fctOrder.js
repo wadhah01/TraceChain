@@ -4,6 +4,7 @@ const FctOrder = mongoose.model('FctOrder',{
   
    date_Cmd:{
         type : Date,
+        default: Date.now
    },
    deleveryAdress:{
         type : String,

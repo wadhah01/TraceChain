@@ -1,21 +1,19 @@
 const mongoose = require ('mongoose');
 
-const RMOrder = mongoose.model('RMOrder',{
+const PkgOrder = mongoose.model('PkgOrder',{
   
    quantity:{
         type : Number,
    },
-   rawMaterialID:{
+   packageID:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'RawMaterial'
-     
+        ref: 'Package',
    },
    fctOrderID:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'FctOrder'
-        
+        ref: 'FctOrder',
    }
 
 })
 
-module.exports = RMOrder;
+module.exports = PkgOrder;

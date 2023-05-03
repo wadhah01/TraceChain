@@ -5,6 +5,13 @@ const finalProductRoutes = require('./routes/finalProductRoutes');
 const rawMaterialRoutes = require('./routes/rawMaterialRoutes');
 const packageRoutes = require('./routes/packageRoutes');
 const fctOrderRoutes = require('./routes/fctOrderRoutes');
+const rmOrderRoutes = require('./routes/rmOrderRoutes');
+const pkgOrderRoutes = require('./routes/pkgOrderRoutes');
+const dstOrderRoutes = require('./routes/dstOrderRoutes');
+const dstFPRoutes = require('./routes/dstFPRoutes');
+const rtlOrderRoutes = require('./routes/rtlOrderRoutes');
+const rtlFPRoutes = require('./routes/rtlFPRoutes');
+
 
 
 require('./config/connect');
@@ -31,4 +38,10 @@ app.use(finalProductRoutes);
 app.use(rawMaterialRoutes);
 app.use(packageRoutes);
 app.use(fctOrderRoutes);
+app.use(rmOrderRoutes);
+app.use(pkgOrderRoutes);
+app.use(dstOrderRoutes);
+app.use(dstFPRoutes);
+app.use(rtlOrderRoutes);
+app.use(rtlFPRoutes);
 

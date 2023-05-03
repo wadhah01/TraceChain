@@ -1,4 +1,8 @@
 const FctOrder = require('../models/fctOrder');
+const RMOrder = require('../models/rmOrder');
+const PkgOrder = require('../models/pkgOrder');
+
+
 
 const createFctOrder = async (req,res)=>{
 
@@ -18,11 +22,11 @@ const deleteFctOrder = async(req,res)=>{
 
     try{    
         const FctOrderId = req.params.id;
-        const NewFctOrder = await FctOrder.findById(FctOrderId);
-        const FctOrderName = NewFctOrder.name;
-        const FctOrderDeleted = await FctOrder.findByIdAndDelete(FctOrderId);
-        console.log(`${FctOrderName} deleted succefuly`);
-        res.status(201).send(FctOrderDeleted);
+        await RMOrder.deleteMany({ fctOrderID: FctOrderId });
+        await PkgOrder.deleteMany({ fctOrderID: FctOrderId });
+        await FctOrder.deleteOne({ _id: FctOrderId });
+        console.log('command deleted succefully');
+        res.status(201).send();
     }catch(err){
         res.status(400).json(err);
     }

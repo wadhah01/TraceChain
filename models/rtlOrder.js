@@ -3,7 +3,8 @@ const mongoose = require ('mongoose');
 const RtlOrder = mongoose.model('RtlOrder',{
   
    date_Cmd:{
-        type : Date.now
+     type : Date,
+     default: Date.now
    },
    deleveryAdress:{
         type : String
@@ -12,10 +13,10 @@ const RtlOrder = mongoose.model('RtlOrder',{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
    },
-   finalProductID:{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'FinalProduct'
-   }
+//    finalProductID:{
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'FinalProduct'
+//    }
 })
 
 module.exports = RtlOrder;
