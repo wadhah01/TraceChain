@@ -91,6 +91,46 @@ const updateRMById = async (req,res) => {
         res.status(400).json(err);
     }
 }
+const SellRMByid = async (req, res) => {
+    try {
+      const RMId = req.params.id;
+      const amount = req.body.amount;
+      let updated = await RawMaterial.findById(RMId);
+  
+      if (!updated) {
+        res.status(404).json({ message: 'Raw material not found' });
+      } else {
+        if (updated.stock < amount) {
+          res.status(404).json({ message: 'Raw Material stock is not sufficient' });
+        } else {
+          updated.stock -= amount;
+          const RMsold = await updated.save();
+          res.status(200).json(RMsold);
+          console.log(RMsold);
+        }
+      }
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
+  const BuyRMByid = async (req, res) => {
+    try {
+      const RMId = req.params.id;
+      const amount = req.body.amount;
+      let updated = await RawMaterial.findById(RMId);
+  
+      if (!updated) {
+        res.status(404).json({ message: 'Raw material not found' });
+      } else {
+        updated.stock += amount;
+        const RMbought = await updated.save();
+        res.status(200).json(RMbought);
+        console.log(RMbought);
+      }
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
 
 
 module.exports = {
@@ -100,5 +140,7 @@ module.exports = {
     findRMByType,
     findRMAll,
     updateRMById,
-    findRMByCreator
+    findRMByCreator,
+    SellRMByid,
+    BuyRMByid
 }

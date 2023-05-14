@@ -1,20 +1,20 @@
 const FinalProduct = require('../models/finalProduct');
 
-const createFP = async (req,res)=>{
 
-    try{
-
+const createFP = async (req, res) => {
+    try {
         const FPData = req.body;
-        const newFP = new FinalProduct({...FPData,FPImage:req.file.path});
+        const newFP = new FinalProduct({...FPData, FPImage: req.file.path});
         const savedFP = await newFP.save();
         res.status(200).send(savedFP);
         console.log(savedFP);
-
-    }catch(err){
+    } catch (err) {
         res.status(400).send(err);
     }
-
 }
+
+module.exports = {createFP};
+
 
 const deleteFPrById = async(req,res)=>{
 
@@ -119,8 +119,46 @@ const updateFPById = async (req, res) => {
       res.status(400).json(err);
     }
   };
+  const SellFPByid = async (req, res) => {
+    try {
+      const FPId = req.params.id;
+      const amount = req.body.amount;
+      let updated = await FinalProduct.findById(FPId);
   
-
+      if (!updated) {
+        res.status(404).json({ message: 'Final Product not found' });
+      } else {
+        if (updated.stock < amount) {
+          res.status(404).json({ message: 'Final product stock is not sufficient' });
+        } else {
+          updated.stock -= amount;
+          const FPsold = await updated.save();
+          res.status(200).json(FPsold);
+          console.log(FPsold);
+        }
+      }
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
+  const BuyFPByid = async (req, res) => {
+    try {
+      const FPId = req.params.id;
+      const amount = req.body.amount;
+      let updated = await FinalProduct.findById(FPId);
+  
+      if (!updated) {
+        res.status(404).json({ message: 'Final Product not found' });
+      } else {
+        updated.stock += amount;
+        const FPbought = await updated.save();
+        res.status(200).json(FPbought);
+        console.log(FPbought);
+      }
+    } catch (err) {
+      res.status(400).json(err);
+    }
+};
 
 module.exports = {
     createFP,
@@ -128,6 +166,7 @@ module.exports = {
     findFPrById,
     findFPByType,
     findFPAll,
-    updateFPById
-
+    updateFPById,
+    SellFPByid,
+    BuyFPByid
 }

@@ -23,5 +23,8 @@ router.get('/findRMByCreator/:creator',rawMaterialController.findRMByCreator);
 router.get('/findRMAll',rawMaterialController.findRMAll);
 router.delete('/deleteRMrById/:id',rawMaterialController.deleteRMrById);
 router.put('/updateRMById/:id', upload.single("certificationImage"), rawMaterialController.updateRMById);
+router.post('/SellRMbyId/:id', rawMaterialController.SellRMByid);
+router.post('/BuyRMbyId/:id', rawMaterialController.BuyRMByid);
+
 
 module.exports = router ;

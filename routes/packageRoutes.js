@@ -9,5 +9,8 @@ router.get('/findPkgByCreator/:creator',packageController.findPkgByCreator);
 router.get('/findPkgAll',packageController.findPkgAll);
 router.delete('/deletePkgById/:id',packageController.deletePkgById);
 router.put('/updatePkgById/:id',packageController.updatePkgById);
+router.post('/SellPkgById/:id',packageController.SellPkgByid);
+router.post('/BuyPkgById/:id',packageController.BuyPkgByid);
+
 
 module.exports = router ;

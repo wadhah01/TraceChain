@@ -25,7 +25,8 @@ const FinalProduct = mongoose.model('FinalProduct',{
     createdBy:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
+    }
+    ,
     FPImage:{
         type : String
     }

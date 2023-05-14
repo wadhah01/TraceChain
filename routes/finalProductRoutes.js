@@ -16,11 +16,14 @@ const mystorage = multer.diskStorage({
 
 const upload=multer({storage:mystorage})
 
-router.post('/createFP',upload.any("FPImage"), finalProductController.createFP);
+router.post('/createFP',upload.single("FPImage"), finalProductController.createFP);
 router.get('/findFPrById/:id',finalProductController.findFPrById);
 router.get('/findFPByType/:type',finalProductController.findFPByType);
 router.get('/findFPAll',finalProductController.findFPAll);
 router.delete('/deleteFPrById/:id',finalProductController.deleteFPrById);
 router.put('/updateFPById/:id',upload.any("FPImage"),finalProductController.updateFPById);
+router.post('/SellFPbyId/:id', finalProductController.SellFPByid);
+router.post('/BuyFPbyId/:id', finalProductController.BuyFPByid);
+
 
 module.exports = router ;

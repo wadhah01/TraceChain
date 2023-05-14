@@ -90,6 +90,46 @@ const updatePkgById = async (req,res) => {
         res.status(400).json(err);
     }
 }
+const SellPkgByid = async (req, res) => {
+    try {
+      const PkgId = req.params.id;
+      const amount = req.body.amount;
+      let updated = await package.findById(PkgId);
+  
+      if (!updated) {
+        res.status(404).json({ message: 'Packaging product not found' });
+      } else {
+        if (updated.stock < amount) {
+          res.status(404).json({ message: 'Packaging product stock is not sufficient' });
+        } else {
+          updated.stock -= amount;
+          const Pkgsold = await updated.save();
+          res.status(200).json(Pkgsold);
+          console.log(Pkgsold);
+        }
+      }
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
+  const BuyPkgByid = async (req, res) => {
+    try {
+      const PkgId = req.params.id;
+      const amount = req.body.amount;
+      let updated = await package.findById(PkgId);
+  
+      if (!updated) {
+        res.status(404).json({ message: 'Packaging product not found' });
+      } else {
+        updated.stock += amount;
+        const PkgBought = await updated.save();
+        res.status(200).json(PkgBought);
+        console.log(PkgBought);
+      }
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  };
 
 
 module.exports = {
@@ -99,6 +139,8 @@ module.exports = {
     findPkgByCreator,
     findPkgByType,
     findPkgAll,
-    updatePkgById
+    updatePkgById,
+    SellPkgByid,
+    BuyPkgByid,
 
 }

@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/SupplyChain')
+mongoose.connect('mongodb+srv://wadhahagoubi:test@cluster0.rn9kmzx.mongodb.net/?retryWrites=true&w=majority')
     .then(
         ()=>{
             console.log('MongoDB Compass connected');

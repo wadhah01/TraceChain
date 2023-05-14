@@ -5,6 +5,10 @@ const {isEmail} = require('validator');
 
 
 const User = mongoose.model('User', {
+    Fullname:{
+        type: String,
+        required: [true,'You must enter your name'],
+    },
     email:{
         type: String,
         required: [true,'You must enter your email'],
@@ -18,7 +22,7 @@ const User = mongoose.model('User', {
     role:{
         type: String,
         required: [true,'You must pick your role'],
-        enum:['provider','factory','distributor','retailer'],
+        enum:['provider','factory','distributor','retailer','consumer'],
     },
     companyName: {
         type: String,
@@ -40,6 +44,10 @@ const User = mongoose.model('User', {
     wallet: {
         type:String,
         required:[true, 'You must enter your wallet Address'],
+    },
+    verificationcode: {
+        type:String,
+        
     }
 
 

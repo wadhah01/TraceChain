@@ -11,6 +11,8 @@ router.get('/findUsrByRole/:role',userController.findUsrByRole);
 router.get('/findUsrAll',userController.findUsrAll);
 router.delete('/deleteUsrById/:id',userController.deleteUsrById);
 router.put('/updateUsrById/:id',userController.updateUsrById);
+router.post('/logout', userController.logout);
+
 
 
 
