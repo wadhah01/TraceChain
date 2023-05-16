@@ -5,10 +5,7 @@ const {isEmail} = require('validator');
 
 
 const User = mongoose.model('User', {
-    Fullname:{
-        type: String,
-        required: [true,'You must enter your name'],
-    },
+   
     email:{
         type: String,
         required: [true,'You must enter your email'],
