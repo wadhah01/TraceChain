@@ -1,0 +1,62 @@
+const handleDeleteProduct = (productId) => {
+    axios
+      .delete(`http://localhost:3000/deleteFPrById/${productId}`)
+      .then(() => {
+        // Filter out the deleted product from the local state
+        const updatedProducts = products.filter((product) => product.id !== productId);
+        setProducts(updatedProducts);
+      })
+      .catch((error) => {
+        console.error('Error deleting product:', error);
+      });
+  };
+
+-----------------------------------------------------------------------------------------
+==========>   <StockProductCard product={product} 
+                                              onDelete={handleDeleteProduct()}/>
+#########################################################################################
+ const handleDeleteClick = () => {
+    setIsDeleteDialogOpen(true);
+  };
+
+const handleDeleteConfirmation = () => {
+    axios
+      .delete(`http://localhost:3000/deleteFPrById/${product._id}`)
+      .then(() => {
+        onDelete(product._id); // Pass the product ID to the onDelete function
+        setIsDeleteDialogOpen(false);
+      })
+      .catch((error) => {
+        console.error('Error deleting product:', error);
+      });
+  };
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false);
+  };
+
+-----------------------------------------------------------------------------------------
+<Button
+                variant="contained"
+                color="primary"
+                sx={{ marginRight: '20px' }} // Add margin to the right of the "Delete" button
+                onClick={handleDeleteClick}
+            >
+                <DeleteOutlinedIcon />
+            </Button>
+     <Dialog open={isDeleteDialogOpen} 
+              onClose={handleDeleteCancel}>
+        <DialogTitle>Confirmation</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete the product `{product.name}`?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteCancel}>Cancel</Button>
+          <Button onClick={handleDeleteConfirmation} 
+                  color="error">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+#########################################################################################
